@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <div>
+        <h1>Log in</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form action="/login" method="post" name="submit" autocomplete="off">
+            {{ form.hidden_tag() }}
+            <p class="form-input">{{ form.name }}</p>
+            <p class="form-input">{{ form.password }}</p>
+            <div style="display: flex; flex-direction: row; gap:10px">
+                <button class="form-button btn btn-success" type="submit" value="Submit"> Submit </button>
+                <button class="form-button btn btn-danger" type="reset"> Reset </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
