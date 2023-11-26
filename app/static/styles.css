@@ -1,0 +1,14 @@
+.page_container_v {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    flex-grow: 1;
+    margin: 15px;
+  }
+  
+  .page_container_h {
+    display: flex;
+    flex-direction: row;
+    gap: 180px;
+  }
