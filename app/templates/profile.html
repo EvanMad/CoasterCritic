@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Welcome, {{ name }}!
-</h1>
+<div class="page_container_v">
+  <h1 class="title" style="font-weight:bold; color: #FF9933;">
+    {{ name }}
+  </h1>
+  <div style="padding-left: 10px;" class="">
+    <div class="entry" onclick="open_page()">
+      <h2 style="user-select: none">Nemesis</h2>
+      <p style="user-select: none">Pretty good ride, this</p>
+    </div>
+    <div class="entry">
+      <h2 style="user-select: none">Oblivion</h2>
+      <p style="user-select: none">Pretty good ride, this</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

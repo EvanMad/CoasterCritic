@@ -7,8 +7,35 @@
     margin: 15px;
   }
   
-  .page_container_h {
-    display: flex;
-    flex-direction: row;
-    gap: 180px;
-  }
+.page_container_h {
+  display: flex;
+  flex-direction: row;
+  gap: 180px;
+}
+
+.page_container_c {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.font-test {
+  font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.entry:hover {
+  background-color:#FF9933;
+  text-decoration:none;
+  color:#FFFFFF;
+}
+
+.nav-link:hover {
+  background-color:#FF9933;
+}
+
+.btn-outline-success:hover {
+  background-color:#FF9933;
+  border-color: #FF9933;
+}
