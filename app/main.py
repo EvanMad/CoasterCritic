@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, send_from_directory
 from . import db
 from flask_login import login_required, current_user
 from . import models
+from sqlalchemy import func
 
 main = Blueprint('main', __name__)
 
@@ -18,10 +19,24 @@ def profile():
 @main.route('/rollercoaster/<rc_id>')
 def rollercoaster_page(rc_id):
     #rc = get_coaster(rc_id)
-    rc = models.Rollercoaster.query.filter_by(id=rc_id).first()
-    print(rc.name)
-    return render_template('rollercoaster.html', rc=rc, user=user, rollercoaster=rollercoaster)
+    rollercoaster = models.Rollercoaster.query.filter_by(id=rc_id).first()
 
+    average_score = (
+    db.session.query(func.avg(models.Review.rating))
+    .join(models.Rollercoaster, models.Review.rollercoaster_id == rollercoaster.id)
+    .first()
+    )[0]
+
+    reviews = models.Review.query.filter_by(rollercoaster_id=rollercoaster.id).all()
+    print(reviews)
+    average_score = round(average_score,2)
+
+    return render_template('rollercoaster.html', rollercoaster=rollercoaster, average_score=average_score, reviews=reviews)
+
+
+@main.route('/assets/<filename>')
+def get_image(filename):
+    return send_from_directory('assets', filename)
 
 @main.route('/404')
 def four_o_four():

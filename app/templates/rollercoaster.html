@@ -2,8 +2,46 @@
 
 {% block content %}
 <div>
-  <div class="page_container_c">
-    <h1>{{rc.name}}</h1>
+  <div class="rollercoaster_page_holder">
+    <div>
+      <h1 style="font-size: 5.5rem;">{{rollercoaster.name}}</h1>
+      {% if average_score > 8.5%}
+      <h2 style="font-size: 4.5rem; color: #FF9933;">{{average_score}}</h2>
+      {% else %}
+      <h2 style="font-size: 4.5rem;">{{average_score}}</h2>
+      {% endif %}
+      <div style="gap:40px" class="page_container_h">
+        <div>
+          <h2>Year: {{rollercoaster.year}}</h2>
+          <h2>Model: {{rollercoaster.model}}</h2>
+          <h2>Manufacturer: {{rollercoaster.manufacturer}}</h2>
+        </div>
+        <div>
+          <h2>Inversions: {{rollercoaster.inversions}}</h2>
+          <h2>Speed: {{rollercoaster.speed}}</h2>
+          <h2>Height: {{rollercoaster.height}}</h2>
+          <!-- <h2>Length: {{rollercoaster.length}}</h2> -->
+        </div>
+      </div>
+      <div class="review_container">
+        {% for review in reviews%}
+        <div class="review_entry" onClick="open_review({{review.id}})">
+          <div class="review_content">
+            {% if review.rating > 8.5 %}
+            <h2 style="user-select: none;" class="bold_rating">{{review.rating}}</h2>
+            <md-block>{{ review.review_text[:100] }}..</md-block>
+            {% else %}
+            <h2>{{review.rating}}</h2>
+            <md-block>{{ review.review_text[:100] }}..</md-block>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="image-container">
+      <img class="rollercoaster_img img-thumbnail" src="/assets/{{ rollercoaster.id }}.jpg">
+    </div>
   </div>
 </div>
 {% endblock %}

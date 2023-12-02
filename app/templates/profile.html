@@ -6,26 +6,21 @@
     {{ user.name }}
   </h1>
   {% for review in reviews %}
-  <div class="">
-    <div class="review_entry page_container_h">
-      <h2>{{review[1].name}}</h2>
-      <h2>{{review[0].rating}}</h2>
+  <div class="review_entry review_container" onClick="open_review({{review[0].id}})">
+    <h2 style="user-select: none;">{{review[1].name}}</h2>
+    <div class="review_content">
+      {% if review[0].rating > 8.5 %}
+        <h2 style="user-select: none;" class="bold_rating">{{review[0].rating}}</h2>
+        <md-block>{{ review[0].review_text[:100] }}..</md-block>
+      {% else %}
+        <h2>{{review[0].rating}}</h2>
+        <md-block>{{ review[0].review_text[:100] }}..</md-block>
+      {% endif %}
     </div>
-    <!-- <md-block>{{review[0].review_text}}</md-block> -->
   </div>
   {% endfor %}
   <div>
-    <button>+</button>
+    <button style="margin-left: 2px;" type="button" class="btn btn-primary">+</button>
   </div>
-  <!-- <div style="padding-left: 10px;" class="">
-    <div class="entry" onclick="open_page()">
-      <h2 style="user-select: none">Nemesis</h2>
-      <p style="user-select: none">Pretty good ride, this</p>
-    </div>
-    <div class="entry">
-      <h2 style="user-select: none">Oblivion</h2>
-      <p style="user-select: none">Pretty good ride, this</p>
-    </div>
-  </div> -->
 </div>
 {% endblock %}

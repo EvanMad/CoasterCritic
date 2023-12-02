@@ -45,3 +45,62 @@
   background-color:#FF9933;
   border-color: #FF9933;
 }
+
+.review_entry {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.review_entry:hover {
+  background-color: #FF9933;
+  border-color: #FF9933;
+}
+
+.review_container {
+  display: flex;
+  flex-direction: column;
+  gap: 5;
+  padding-top: 5;
+  flex-grow: 1;
+}
+
+.review_content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bold_rating {
+  color: #FF9933;
+  font-weight: bolder;
+}
+
+.image-container {
+  width: 900px; /* Set the desired width */
+  height: 700px;
+  overflow: hidden;
+  position: absolute;
+  right:260;
+  margin-top: 60;
+}
+
+.rollercoaster_img {
+  width: 100%; /* Ensure the image takes 100% width of its container */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the image precisely */
+  border-width: 10px;
+  border-color: #FF9933;
+}
+
+.rollercoaster_page_holder {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  flex-grow: 1;
+  margin: 25px;
+}
