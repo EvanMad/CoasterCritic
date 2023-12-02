@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="page_container_v">
+<div class="page_container_v" style="padding-left: 10px;">
   <h1 class="title" style="font-weight:bold; color: #FF9933;">
-    {{ name }}
+    {{ user.name }}
   </h1>
-  <div style="padding-left: 10px;" class="">
+  {% for review in reviews %}
+  <div class="">
+    <div class="review_entry page_container_h">
+      <h2>{{review[1].name}}</h2>
+      <h2>{{review[0].rating}}</h2>
+    </div>
+    <!-- <md-block>{{review[0].review_text}}</md-block> -->
+  </div>
+  {% endfor %}
+  <div>
+    <button>+</button>
+  </div>
+  <!-- <div style="padding-left: 10px;" class="">
     <div class="entry" onclick="open_page()">
       <h2 style="user-select: none">Nemesis</h2>
       <p style="user-select: none">Pretty good ride, this</p>
@@ -14,6 +26,6 @@
       <h2 style="user-select: none">Oblivion</h2>
       <p style="user-select: none">Pretty good ride, this</p>
     </div>
-  </div>
+  </div> -->
 </div>
 {% endblock %}

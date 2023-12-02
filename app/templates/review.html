@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page_container_v">
+  <div>
+    <h1>Review of {{rollercoaster.name}} by {{user.name}}</h1>
+    <h2>{{review.rating}}</h2>
+    <md-block>{{review.review_text}}</md-block>
+  </div>
+  <button>LIKE</button>
+</div>
+{% endblock %}

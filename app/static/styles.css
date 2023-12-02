@@ -10,7 +10,7 @@
 .page_container_h {
   display: flex;
   flex-direction: row;
-  gap: 180px;
+  gap: 18px;
 }
 
 .page_container_c {
@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-left: 10px;
 }
 
 .font-test {
@@ -36,6 +37,11 @@
 }
 
 .btn-outline-success:hover {
+  background-color:#FF9933;
+  border-color: #FF9933;
+}
+
+.review_entry:hover {
   background-color:#FF9933;
   border-color: #FF9933;
 }
