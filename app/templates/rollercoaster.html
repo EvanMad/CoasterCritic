@@ -2,46 +2,51 @@
 
 {% block content %}
 <div>
-  <div class="rollercoaster_page_holder">
-    <div>
-      <h1 style="font-size: 5.5rem;">{{rollercoaster.name}}</h1>
-      {% if average_score > 8.5%}
-      <h2 style="font-size: 4.5rem; color: #FF9933;">{{average_score}}</h2>
-      {% else %}
-      <h2 style="font-size: 4.5rem;">{{average_score}}</h2>
-      {% endif %}
-      <div style="gap:40px" class="page_container_h">
-        <div>
-          <h2>Year: {{rollercoaster.year}}</h2>
-          <h2>Model: {{rollercoaster.model}}</h2>
-          <h2>Manufacturer: {{rollercoaster.manufacturer}}</h2>
-        </div>
-        <div>
-          <h2>Inversions: {{rollercoaster.inversions}}</h2>
-          <h2>Speed: {{rollercoaster.speed}}</h2>
-          <h2>Height: {{rollercoaster.height}}</h2>
-          <!-- <h2>Length: {{rollercoaster.length}}</h2> -->
-        </div>
-      </div>
-      <div class="review_container">
-        {% for review in reviews%}
-        <div class="review_entry" onClick="open_review({{review.id}})">
-          <div class="review_content">
-            {% if review.rating > 8.5 %}
-            <h2 style="user-select: none;" class="bold_rating">{{review.rating}}</h2>
-            <md-block>{{ review.review_text[:100] }}..</md-block>
-            {% else %}
-            <h2>{{review.rating}}</h2>
-            <md-block>{{ review.review_text[:100] }}..</md-block>
-            {% endif %}
+  <div class="page_container_h">
+    <div class="rollercoaster_page_holder">
+      <div style="width:100%; ">
+        <h1 style="font-size: 5.5rem;">{{rollercoaster.name}}</h1>
+        {% if average_score > 8.5%}
+        <h2 style="font-size: 4.5rem; color: #FF9933;">{{average_score}}</h2>
+        {% else %}
+        <h2 style="font-size: 4.5rem;">{{average_score}}</h2>
+        {% endif %}
+        <div style="gap:40px" class="page_container_h">
+          <div>
+            <h2>Year: {{rollercoaster.year}}</h2>
+            <h2>Model: {{rollercoaster.model}}</h2>
+            <h2>Manufacturer: {{rollercoaster.manufacturer}}</h2>
+          </div>
+          <div>
+            <h2>Inversions: {{rollercoaster.inversions}}</h2>
+            <h2>Speed: {{rollercoaster.speed}}</h2>
+            <h2>Height: {{rollercoaster.height}}</h2>
+            <!-- <h2>Length: {{rollercoaster.length}}</h2> -->
           </div>
         </div>
-        {% endfor %}
+        <div>
+          <p class="font-test"style="font-size: 1.5rem;">This is a rollercoaster! WIP</p>
+        </div>
       </div>
     </div>
-    <div class="image-container">
+    <div class="rc_image_container">
       <img class="rollercoaster_img img-thumbnail" src="/assets/{{ rollercoaster.id }}.jpg">
     </div>
+  </div>
+  <div class="review_container">
+    <h2>Reviews</h2>
+    {% for review in reviews%}
+    <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;" onclick="open_review({{review.id}})">
+      <div class="card-body">
+          <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
+              class="card-title">{{ review.name}}</h5>
+          <p style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
+              class="card-text"> {{ review.rating }}</p>
+          <p class="card-text">{{ review.review_text[:100] }}...</p>
+      </div>
+  </div>
+  
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

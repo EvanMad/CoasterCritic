@@ -61,9 +61,10 @@
 .review_container {
   display: flex;
   flex-direction: column;
-  gap: 5;
-  padding-top: 5;
+  gap: 10px;
+  padding-top: 5px;
   flex-grow: 1;
+  margin-left: 25px;
 }
 
 .review_content {
@@ -86,15 +87,17 @@
   margin-top: 60;
 }
 
+.rc_image_container {
+  height: 100%;
+  /* width: 100%;
+  margin-left: 10%; */
+  margin-right: 3.8%;
+  margin-top:10px;
+}
+
 .rollercoaster_img {
-  width: 100%; /* Ensure the image takes 100% width of its container */
-  height: auto; /* Maintain aspect ratio */
-  position: absolute;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Center the image precisely */
-  border-width: 10px;
-  border-color: #FF9933;
+  width: 820px;
+  height: auto;
 }
 
 .rollercoaster_page_holder {
@@ -103,4 +106,30 @@
   gap: 18px;
   flex-grow: 1;
   margin: 25px;
+}
+
+body {
+  /* background-color: rgba(89, 151, 151, 0.664); */
+  /* background-color: #88BDBC; */
+  background-color: aliceblue;
+}
+
+.mynavbar {
+  /* background-color: #5183a5 !important; */
+  background-color: #ff9933cb !important;
+}
+
+.card:hover
+{
+  background-color: #ff9933cb;
+  transition: background-color 0.4s, border-color 0.4s;
+}
+
+.rollercoaster_card_img {
+  width: 15rem;
+  height: auto;
+  margin: 15px;
+  border-radius: 6px;
+  border-color: #FF9933;
+  border-style: solid;
 }

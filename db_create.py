@@ -45,7 +45,7 @@ with app.app_context():
 
     for i in range(142):
         rollercoaster_id = random.randint(1,13)
-        review_text = f"This is a review for rollercoaster {rollercoaster_id}. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        review_text = f"This is a review for rollercoaster {rollercoaster_id}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hello World <3"
         rating = round(random.uniform(5.0, 10.0),2)  # Random rating between 5.0 and 10.0
         user = random.randint(1,8)
         review = Review(user_id=user, rollercoaster_id=rollercoaster_id, rating=rating, review_text=review_text)
