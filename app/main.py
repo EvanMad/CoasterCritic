@@ -73,11 +73,6 @@ def view_profile(user_id):
     else:
         return redirect(url_for('main.four_o_four'))
 
-
-@main.route('/add_review', methods=['POST'])
-def add_review():
-    pass
-
 @main.route('/rollercoasters', methods=['GET'])
 def view_rollercoasters():
     rollercoasters = models.Rollercoaster.query.all()
@@ -87,3 +82,11 @@ def view_rollercoasters():
 def view_users():
     users = models.User.query.all()
     return render_template('users.html', users=users)
+
+@main.route('/add_review', methods=['GET'])
+def add_review():
+    return render_template('write_review.html')
+
+@main.route('/add_review', methods=['POST'])
+def add_review_post():
+    pass

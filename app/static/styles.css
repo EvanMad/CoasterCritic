@@ -97,7 +97,8 @@
 
 .rollercoaster_img {
   width: 820px;
-  height: auto;
+  height: 500px;
+  object-fit: cover;
 }
 
 .rollercoaster_page_holder {

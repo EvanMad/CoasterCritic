@@ -2,8 +2,17 @@
 
 {% block content %}
 <div>
-    {% for user in users %}
-    <p>{{ user.name }}</p>
-    {% endfor %}
+    <div class="review_container">
+        <h2>CoasterCritic Users</h2>
+        {% for user in users %}
+        <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;"
+            onclick="open_profile({{user.id}})">
+            <div class="card-body">
+                <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
+                    class="card-title">{{ user.name}}</h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
