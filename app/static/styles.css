@@ -128,9 +128,10 @@ body {
 
 .rollercoaster_card_img {
   width: 15rem;
-  height: auto;
+  height: 10rem;
   margin: 15px;
   border-radius: 6px;
   border-color: #FF9933;
   border-style: solid;
+  object-fit: cover;
 }

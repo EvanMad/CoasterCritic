@@ -10,7 +10,6 @@ class LoginForm(FlaskForm):
     password = StringField('password', validators=[
         DataRequired()])
 
-
 class SignupForm(FlaskForm):
     name = FloatField('name', validators=[DataRequired()])
     password = StringField('password', validators=[
