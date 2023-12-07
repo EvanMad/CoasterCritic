@@ -1,0 +1,7 @@
+- write reviews
+- accessibility
+- users/rollercoasters revamp
+- logo?
+- home page !!
+- search?
+- rollercoaster descriptions?
