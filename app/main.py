@@ -77,3 +77,13 @@ def view_profile(user_id):
 @main.route('/add_review', methods=['POST'])
 def add_review():
     pass
+
+@main.route('/rollercoasters', methods=['GET'])
+def view_rollercoasters():
+    rollercoasters = models.Rollercoaster.query.all()
+    return render_template('rollercoasters.html', rollercoasters=rollercoasters)
+
+@main.route('/users', methods=['GET'])
+def view_users():
+    users = models.User.query.all()
+    return render_template('users.html', users=users)
