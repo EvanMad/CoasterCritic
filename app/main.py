@@ -4,6 +4,8 @@ from flask_login import login_required, current_user
 from . import models
 from sqlalchemy import func
 
+from .forms import ReviewForm
+
 main = Blueprint('main', __name__)
 
 @main.route('/')
@@ -50,12 +52,14 @@ def review_page(review_id):
         .join(models.User, models.Review.user_id == models.User.id)
         .filter(models.Review.id == review_id)
         .all()
-    )[0]
-    review = db_query[0]
-    if review:
-        rollercoaster = db_query[1]
-        user = db_query[2]
-        return render_template('review.html', review=review, user=user, rollercoaster=rollercoaster)
+    )
+    if len(db_query) > 0:
+        db_query = db_query[0]
+        review = db_query[0]
+        if review:
+            rollercoaster = db_query[1]
+            user = db_query[2]
+            return render_template('review.html', review=review, user=user, rollercoaster=rollercoaster)
     return redirect(url_for('main.four_o_four'))
 
 @main.route('/profile/<user_id>')
@@ -83,10 +87,34 @@ def view_users():
     users = models.User.query.all()
     return render_template('users.html', users=users)
 
+@login_required
 @main.route('/add_review', methods=['GET'])
 def add_review():
-    return render_template('write_review.html')
 
+    rollercoasters = models.Rollercoaster.query.all()
+
+    rollercoasters_names = [item.name for item in rollercoasters]
+
+    form = ReviewForm()
+    form.rollercoaster.choices = rollercoasters_names
+    return render_template('write_review.html', form=form)
+
+@login_required
 @main.route('/add_review', methods=['POST'])
 def add_review_post():
-    pass
+
+    rollercoaster = request.form.get('rollercoaster')
+    content = request.form.get('content')
+    rating = request.form.get('rating')
+
+    rollercoaster_id = models.Rollercoaster.query.filter_by(name=rollercoaster).first().id
+    new_review = models.Review(user_id=current_user.id,
+                        rollercoaster_id=rollercoaster_id,
+                        rating=rating,
+                        review_text=content
+                        )
+    db.session.add(new_review)
+    db.session.commit()
+    flash("added to db")
+
+    return redirect(url_for('main.review_page', review_id=new_review.id))

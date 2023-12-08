@@ -48,7 +48,7 @@ def signup_post():
     flash("added to db")
     return redirect(url_for('auth.login'))
 
-
+@login_required
 @auth.route('/logout')
 def logout():
     logout_user()

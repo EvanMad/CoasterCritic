@@ -4,13 +4,16 @@
 <div>
   <div class="page_container_c">
     <h1 class="font-test">Write Review</h1>
-    <form action="/login" method="post" name="submit" autocomplete="off" class="mt-4">
+    <form action="/add_review" method="post" name="submit" autocomplete="off" class="mt-4">
         {{ form.hidden_tag() }}
         <div class="mb-3">
-            {{ form.name(class="form-control", placeholder="Username") }}
+          {{ form.rollercoaster(class="form-control") }}
         </div>
         <div class="mb-3">
-            {{ form.password(class="form-control", type="password", placeholder="Password") }}
+          {{ form.rating(class="form-control") }}
+      </div>
+        <div class="mb-3">
+            {{ form.content(class="form-control", placeholder="Review Content") }}
         </div>
         <div class="d-flex justify-content-between">
             <button style="background-color: #ff9933cb;" class="btn" type="submit">Submit</button>
