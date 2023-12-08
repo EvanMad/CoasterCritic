@@ -1,14 +1,14 @@
-- write reviews
+<!-- - write reviews -->
 - accessibility
 - users/rollercoasters revamp
 - home page !!
 - rollercoaster descriptions?
 - likes
 
-- assets in static
+<!-- - assets in static -->
 - templates in folders
 - flashed messages
-- ditch search
+<!-- - ditch search -->
 - check colours/contrast on coolors
 - icons on navbar
 - alt text / aria tags / font sizes
