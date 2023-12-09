@@ -48,7 +48,8 @@ with app.app_context():
         review_text = f"This is a review for rollercoaster {rollercoaster_id}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hello World <3"
         rating = round(random.uniform(5.0, 10.0),2)  # Random rating between 5.0 and 10.0
         user = random.randint(1,8)
-        review = Review(user_id=user, rollercoaster_id=rollercoaster_id, rating=rating, review_text=review_text)
+        likes = random.randint(1,42)
+        review = Review(user_id=user, rollercoaster_id=rollercoaster_id, rating=rating, review_text=review_text, likes=likes)
         db.session.add(review)
     db.session.commit()
 

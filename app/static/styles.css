@@ -112,12 +112,15 @@
 body {
   /* background-color: rgba(89, 151, 151, 0.664); */
   /* background-color: #88BDBC; */
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
+  background-color: #d6f5f5;
 }
 
 .mynavbar {
   /* background-color: #5183a5 !important; */
-  background-color: #ff9933 !important;
+  /* background-color: #ff9933 !important; */
+  background-color: #29a3a3 !important;
+  height: 80px;
 }
 
 .card:hover
@@ -141,4 +144,14 @@ body {
   position: relative;
   top:-5px;
   left:5px;
+  font-size: 20;
+}
+
+.like-icon {
+  color: #ccc; /* Default color */
+  cursor: pointer;
+}
+
+.liked {
+  color: #FF9933; /* Liked color */
 }

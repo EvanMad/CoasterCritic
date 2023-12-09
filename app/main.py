@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, send_from_directory
+from flask import Blueprint, render_template, redirect, url_for, flash, request, send_from_directory, jsonify
 from . import db
 from flask_login import login_required, current_user
 from . import models
 from sqlalchemy import func
-
+import json
 from .forms import ReviewForm
 
 main = Blueprint('main', __name__)
@@ -23,19 +23,21 @@ def profile():
 def rollercoaster_page(rc_id):
     #rc = get_coaster(rc_id)
     rollercoaster = models.Rollercoaster.query.filter_by(id=rc_id).first()
+    if rollercoaster:
+        
+        average_score = (
+        db.session.query(func.avg(models.Review.rating))
+        .join(models.Rollercoaster, models.Review.rollercoaster_id == rollercoaster.id)
+        .first()
+        )[0]
 
-    average_score = (
-    db.session.query(func.avg(models.Review.rating))
-    .join(models.Rollercoaster, models.Review.rollercoaster_id == rollercoaster.id)
-    .first()
-    )[0]
+        reviews = models.Review.query.filter_by(rollercoaster_id=rollercoaster.id).all()
+        print(reviews)
+        average_score = round(average_score,2)
 
-    reviews = models.Review.query.filter_by(rollercoaster_id=rollercoaster.id).all()
-    print(reviews)
-    average_score = round(average_score,2)
-
-    return render_template('rollercoaster.html', rollercoaster=rollercoaster, average_score=average_score, reviews=reviews)
-
+        return render_template('rollercoaster.html', rollercoaster=rollercoaster, average_score=average_score, reviews=reviews)
+    else:
+        return render_template('404.html')
 
 @main.route('/assets/<filename>')
 def get_image(filename):
@@ -119,3 +121,40 @@ def add_review_post():
     flash("added to db")
 
     return redirect(url_for('main.review_page', review_id=new_review.id))
+
+@login_required
+@main.route("/add_like", methods=['POST'])
+def add_like():
+    try:
+        review_id = json.loads(request.data)['review_id']
+        review = models.Review.query.filter_by(id=review_id).first()
+
+        if review:
+            review.likes += 1
+            db.session.commit()
+
+            return jsonify({"likes": review.likes, "status": "success"}), 200
+        else:
+            return jsonify({"error": "Review not found"}), 404
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@login_required
+@main.route("/remove_like", methods=['POST'])
+def remove_like():
+    try:
+        review_id = json.loads(request.data)['review_id']
+        review = models.Review.query.filter_by(id=review_id).first()
+
+        if review:
+            review.likes -= 1
+            db.session.commit()
+
+            return jsonify({"likes": review.likes, "status": "success"}), 200
+        else:
+            return jsonify({"error": "Review not found"}), 404
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+

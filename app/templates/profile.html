@@ -2,32 +2,16 @@
 
 {% block content %}
 <div class="page_container_v" style="padding-left: 10px;">
-  <!-- <div>
-    <button style="margin-left: 2px;" type="button" class="btn btn-primary">+</button>
-  </div> -->
+
   <h1 class="title" style="font-weight:bold; color: #FF9933;">
     {{ user.name }}
   </h1>
   {% for review in reviews %}
-  <!-- <div class="review_entry review_container" onClick="open_review({{review[0].id}})">
-    <h2 style="user-select: none;">{{review[1].name}}</h2>
-    <div class="review_content">
-      {% if review[0].rating > 8.5 %}
-        <h2 style="user-select: none;" class="bold_rating">{{review[0].rating}}</h2>
-        <md-block>{{ review[0].review_text[:100] }}..</md-block>
-      {% else %}
-        <h2>{{review[0].rating}}</h2>
-        <md-block>{{ review[0].review_text[:100] }}..</md-block>
-      {% endif %}
-    </div>
-  </div> -->
   <div class="card" style="width: 80%;" onclick="open_review({{review[0].id}})">
-    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
     <img class="card-img-top rollercoaster_card_img" src="/static/assets/{{ review[1].id }}.jpg">
     <div class="card-body">
       <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;" class="card-title">{{ review[1].name}}</h5>
       <p style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;" class="card-text"> {{ review[0].rating }}</p>
-      <!-- <p class="card-text">{{ review[0].review_text[:100] }}...</p> -->
       <p class="card-text">{{ review[0].review_text}}</p>
 
     </div>

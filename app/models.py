@@ -39,3 +39,4 @@ class Review(db.Model):
         'rollercoaster.id'), nullable=False)
     rating = db.Column(db.Float)
     review_text = db.Column(db.String(400))
+    likes = db.Column(db.Integer)

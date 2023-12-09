@@ -30,19 +30,24 @@
       </div>
     </div>
     <div style="float:left; " class="rc_image_container">
-      <img class="rollercoaster_img img-thumbnail" src="/static/assets/{{ rollercoaster.id }}.jpg">
+      <img class="img-fluid rollercoaster_img img-thumbnail" src="/static/assets/{{ rollercoaster.id }}.jpg">
     </div>
   </div>
   <div class="review_container">
     <h2>Reviews</h2>
     {% for review in reviews%}
-    <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;" onclick="open_review({{review.id}})">
+    <!-- <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;" onclick="open_review({{review.id}})"> -->
+    <div class="card" style="width: 96%; border: 2px solid #29a3a3; border-radius: 1px;">
       <div class="card-body">
           <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
               class="card-title">{{ review.name}}</h5>
           <p style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
               class="card-text"> {{ review.rating }}</p>
           <p class="card-text">{{ review.review_text[:100] }}...</p>
+          <div style="display: flex; align-items: center; gap:5px;">
+            <div id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like({{review.id}})"><i class="fas fa-heart"></i></div>
+            <span id="{{review.id}}-likes">{{review.likes}}</span>
+          </div>
       </div>
   </div>
   
