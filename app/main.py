@@ -21,19 +21,20 @@ def profile():
 
 @main.route('/rollercoaster/<rc_id>')
 def rollercoaster_page(rc_id):
-    #rc = get_coaster(rc_id)
     rollercoaster = models.Rollercoaster.query.filter_by(id=rc_id).first()
     if rollercoaster:
-        
+        # Calculate the average score using the relationship
         average_score = (
-        db.session.query(func.avg(models.Review.rating))
-        .join(models.Rollercoaster, models.Review.rollercoaster_id == rollercoaster.id)
-        .first()
+            db.session.query(func.avg(models.Review.rating))
+            .join(models.Review.rollercoaster)  # Join with the Rollercoaster relationship
+            .filter(models.Review.rollercoaster_id == rollercoaster.id)
+            .first()
         )[0]
 
-        reviews = models.Review.query.filter_by(rollercoaster_id=rollercoaster.id).all()
-        print(reviews)
-        average_score = round(average_score,2)
+        # Retrieve reviews using the Rollercoaster relationship
+        reviews = rollercoaster.coaster_reviews
+
+        average_score = round(average_score, 2)
 
         return render_template('rollercoaster.html', rollercoaster=rollercoaster, average_score=average_score, reviews=reviews)
     else:
