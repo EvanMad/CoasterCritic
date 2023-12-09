@@ -1,3 +1,5 @@
+// colection of functions for opening the various pages of the application
+
 function open_review(page)
 {
     console.log(page);

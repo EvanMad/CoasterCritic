@@ -135,3 +135,10 @@ body {
   border-style: solid;
   object-fit: cover;
 }
+
+.navbar_text
+{
+  position: relative;
+  top:-5px;
+  left:5px;
+}

@@ -8,6 +8,7 @@ from .forms import ReviewForm
 
 main = Blueprint('main', __name__)
 
+# Render index
 @main.route('/')
 def index():
     return render_template('index.html')
