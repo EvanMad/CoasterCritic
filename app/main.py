@@ -36,6 +36,7 @@ def index():
 
     # If you want to fetch the average score for each rollercoaster, you can use your function
     average_scores = {rollercoaster.id: get_average_score(rollercoaster.id) for rollercoaster in highest_rated_rollercoasters}
+    highest_rated_rollercoasters.sort(key=lambda rollercoaster: average_scores.get(rollercoaster.id, 0), reverse=True)
 
     highest_rated_rollercoasters = {'rollercoasters': highest_rated_rollercoasters, 'average_scores': average_scores}
 
@@ -169,6 +170,7 @@ def add_review_post():
     rollercoaster = request.form.get('rollercoaster')
     content = request.form.get('content')
     rating = request.form.get('rating')
+    review = round(float(rating), 2)
 
     rollercoaster_id = models.Rollercoaster.query.filter_by(name=rollercoaster).first().id
     new_review = models.Review(user_id=current_user.id,

@@ -10,19 +10,23 @@
           <div class="card-body">
             <div>
                 <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;" class="card-title">{{ item.rollercoaster.name }}</h5>
-                <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{ item.average_score }}</span>    
+                {% if item.average_score > 8.5 %}
+                    <span style="font-weight: bold; color: #29A3A3; font-size: 35px;">{{ item.average_score }}</span>
+                {% else %}
+                    <span style="font-size: 35px;">{{ item.average_score }}</span>
+                {% endif %}
             </div>
             </h5>
             <div style="gap:40px" class="page_container_h">
                 <div>
-                  <p>Year: {{item.rollercoaster.year}}</p>
-                  <p>Model: {{item.rollercoaster.model}}</p>
-                  <p>Manufacturer: {{item.rollercoaster.manufacturer}}</p>
+                  <h5>Year: {{item.rollercoaster.year}}</h5>
+                  <h5>Model: {{item.rollercoaster.model}}</h5>
+                  <h5>Manufacturer: {{item.rollercoaster.manufacturer}}</h5>
                 </div>
                 <div>
-                  <p>Inversions: {{item.rollercoaster.inversions}}</p>
-                  <p>Speed: {{item.rollercoaster.speed}}</p>
-                  <p>Height: {{item.rollercoaster.height}}</p>
+                  <h5>Inversions: {{item.rollercoaster.inversions}}</h5>
+                  <h5>Speed: {{item.rollercoaster.speed}}</h5>
+                  <h5>Height: {{item.rollercoaster.height}}</h5>
                 </div>
               </div>
           </div>

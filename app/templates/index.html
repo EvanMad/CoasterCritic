@@ -2,9 +2,16 @@
 
 {% block content %}
 <div class="container-fluid page_container_c">
-  <h1 class="font-test">Coaster Critic</h1>
-
-  <div class="row row-fluid g-3" style="width: 95%;">
+  <h1 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px;">
+    CoasterCritic
+  </h1>
+  <h5 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px;">
+    Welcome to CoasterCritic! A new website for writing and sharing reviews of rollercoasters
+  </h5>
+  <h5 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px;">
+    By Evan Madurai
+  </h5>
+  <div class="row row-fluid row-cols-1 row-cols-md-2 g-3" style="width: 95%;">
     <div class="col-md-6">
       <div class="card shadow bg-white rounded h-100">
         <div class="card-body">
@@ -18,7 +25,7 @@
                 <div>
                   <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
                     class="card-title">{{ item.rollercoaster.name }}</h5>
-                  <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{ item.average_score }}</span>
+                  <span style="font-weight: bold; color: #29a3a3; font-size: 35px;">{{ item.average_score }}</span>
                 </div>
                 </h5>
               </div>
@@ -40,7 +47,7 @@
               <div>
                 <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
                   class="card-title">{{ rollercoaster.name }}</h5>
-                <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{
+                <span style="font-weight: bold; color: #29a3a3; font-size: 35px;">{{
                   highest_rated_rollercoasters.average_scores[rollercoaster.id] }}</span>
               </div>
               </h5>
@@ -55,13 +62,12 @@
         <div class="card-body">
           <h3 class="card-title">Trending Review</h3>
 
-          <div class="card card-hover shadow bg-white rounded page_container_c mb-3" style="width: 100%;"
+          <div class="card card-hover shadow bg-white rounded page_container_c mb-3" style="width: 100%; height:95%"
             onclick="open_rollercoaster({{trending_review.rollercoaster.id}})">
             <img alt="image of {{trending_review.rollercoaster.name}}" class="card-img-top rollercoaster_card_img"
               src="/static/assets/{{ trending_review.rollercoaster.id }}.jpg">
             <div class="card-body page_container_c">
-              <h5 style="font-size: 20px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
-                class="card-title">{{ trending_review.rollercoaster.name}}</h5>
+              <h2>{{ trending_review.rollercoaster.name}}</h5>
               <h5 style="font-size: 16px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
                 class="card-text">Rating: {{ trending_review.rating }}</h5>
               <h5 style="font-size: 14px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
@@ -75,15 +81,15 @@
     <div class="col-md-6">
       <div class="card shadow bg-white rounded h-100">
         <div class="card-body">
-          <h5 class="card-title">Most liked users</h5>
+          <h3 class="card-title">Most liked users</h3>
           <div class="page_container_v">
             {% for most_liked_user in most_liked_users %}
-            <div class="card shadow bg-white rounded page_container_h card-hover"
+            <div style="padding: 10px;" class="card shadow bg-white rounded page_container_h card-hover"
               onclick="open_profile({{most_liked_user.user.id}})">
               <div>
                 <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
                   class="card-title">{{ most_liked_user.user.name }}</h5>
-                <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{ most_liked_user.total_likes }}
+                <span style="font-weight: bold; color: #29a3a3; font-size: 35px;">{{ most_liked_user.total_likes }}
                   Likes</span>
               </div>
               </h5>
@@ -94,6 +100,9 @@
       </div>
     </div>
   </div>
+  <h5 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px; margin-top:15px">
+    Credit to RCDB for rollercoaster data, Wikipedia for rollercoaster images, Google for icons, Awesome Font for font, and Bootstrap for theming
+  </h5>
 </div>
 </div>
 {% endblock %}

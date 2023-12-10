@@ -3,7 +3,7 @@
 {% block content %}
 <div class="page_container_c" style="padding-left: 10px;">
 
-  <h1 class="title card shadow bg-white rounded" style="font-weight:bold; color: #FF9933; padding: 15px;">
+  <h1 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px;">
     @{{ user.name }}
   </h1>
 
@@ -28,12 +28,12 @@
           <img alt="image of {{review.rollercoaster.name}}" class="card-img-top rollercoaster_card_img"
             src="/static/assets/{{ review.rollercoaster.id }}.jpg">
           <div class="card-body page_container_c">
-            <h5 style="font-size: 20px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
-              class="card-title">{{ review.rollercoaster.name}}</h5>
-            <h5 style="font-size: 16px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
-              class="card-text">Rating: {{ review.rating }}</h5>
-            <h5 style="font-size: 14px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
-              class="card-text">{{ review.review_text}}</h5>
+            <h2 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+              class="card-title">{{ review.rollercoaster.name}}</h2>
+            <h2 style="font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+              class="card-text">{{ review.rating }}</h2>
+            <h4 style="font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+              class="card-text">{{ review.review_text}}</h4>
           </div>
         </div>
         {% endfor %}

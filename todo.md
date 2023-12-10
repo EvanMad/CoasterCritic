@@ -9,7 +9,7 @@
 - templates in folders
 - flashed messages
 <!-- - ditch search -->
-- check colours/contrast on coolors
+<!-- - check colours/contrast on coolors -->
 <!-- - icons on navbar -->
 - alt text / aria tags / font sizes
 - comment python with docstring
