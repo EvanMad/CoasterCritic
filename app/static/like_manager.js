@@ -1,5 +1,8 @@
 
-function add_like(review_id) {
+function add_like(event, review_id) {
+
+    // Make sure that clicking like doesn't also open the review
+    event.stopPropagation();
 
     let like_icon = document.getElementById(review_id + '-icon');
     let liked = like_icon.classList.contains('liked')

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-  <div class="page_container_h">
+<div class="page_container_c">
+  <div class="rollercoaster_header card shadow bg-white rounded">
     <div class="rollercoaster_page_holder">
       <div style="width:100%; ">
         <h1 style="font-size: 5.5rem;">{{rollercoaster.name}}</h1>
@@ -11,7 +11,7 @@
         {% else %}
         <h2 style="font-size: 4.5rem;">{{average_score}}</h2>
         {% endif %}
-        <div style="gap:40px" class="page_container_h">
+        <div style="gap:40px" class="">
           <div>
             <h2>Year: {{rollercoaster.year}}</h2>
             <h2>Model: {{rollercoaster.model}}</h2>
@@ -30,14 +30,14 @@
       </div>
     </div>
     <div style="float:left; " class="rc_image_container">
-      <img class="img-fluid rollercoaster_img img-thumbnail" src="/static/assets/{{ rollercoaster.id }}.jpg">
+      <img alt="image of {{rollercoaster.name}} rollercoaster" class="img-fluid rollercoaster_img img-thumbnail" src="/static/assets/{{ rollercoaster.id }}.jpg">
     </div>
   </div>
   <div class="review_container">
     <h2>Reviews</h2>
     {% for review in reviews%}
     <!-- <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;" onclick="open_review({{review.id}})"> -->
-    <div class="card" style="width: 96%; border: 2px solid #29a3a3; border-radius: 1px;">
+    <div class="card card-hover shadow bg-white rounded" style="width: 100%; border: 2px solid #29a3a3; border-radius: 1px;" onclick="open_profile({{review.user.id}})">
       <div class="card-body">
           <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
               class="card-title">{{ review.user.name}}</h5>
@@ -51,7 +51,7 @@
           <!-- <p class="card-text">{{ review.review_text[:100] }}...</p> -->
           <p class="card-text">{{ review.review_text}}</p>
           <div style="display: flex; align-items: center; gap:5px;">
-            <div id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like({{review.id}})"><i class="fas fa-heart"></i></div>
+            <div id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like(event, {{review.id}})"><i class="fas fa-heart"></i></div>
             <span id="{{review.id}}-likes">{{review.likes}}</span>
           </div>
       </div>

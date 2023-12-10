@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="page_container_v" style="padding-left: 10px;">
+<div class="page_container_c" style="padding-left: 10px;">
 
-  <h1 class="title" style="font-weight:bold; color: #FF9933;">
-    {{ user.name }}
+  <h1 class="title card shadow bg-white rounded" style="font-weight:bold; color: #FF9933; padding: 15px;">
+    @{{ user.name }}
   </h1>
-  {% for review in reviews %}
-  <div class="card" style="width: 80%;" onclick="open_review({{review[0].id}})">
-    <img class="card-img-top rollercoaster_card_img" src="/static/assets/{{ review[1].id }}.jpg">
-    <div class="card-body">
-      <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;" class="card-title">{{ review[1].name}}</h5>
-      <p style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;" class="card-text"> {{ review[0].rating }}</p>
-      <p class="card-text">{{ review[0].review_text}}</p>
-
+  <div class="page_container_v" style="width: 50%;">
+    {% for review in reviews %}
+    <div class="card card-hover shadow bg-white rounded page_container_c" style="width: 100%;" onclick="open_rollercoaster({{review.rollercoaster.id}})">
+      <img alt="image of {{review.rollercoaster.name}}" class="card-img-top rollercoaster_card_img" src="/static/assets/{{ review.rollercoaster.id }}.jpg">
+      <div class="card-body page_container_c">
+        <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+          class="card-title">{{ review.rollercoaster.name}}</h5>
+        <p style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+          class="card-text"> {{ review.rating }}</p>
+        <p class="card-text">{{ review.review_text}}</p>
+      </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
+
 </div>
 {% endblock %}

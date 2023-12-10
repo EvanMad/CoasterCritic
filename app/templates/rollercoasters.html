@@ -1,16 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+<div class="page_container_c">
     <div class="review_container">
-        <h2>Rollercoasters</h2>
-        {% for rollercoaster in rollercoasters %}
-        <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;"
-            onclick="open_rollercoaster({{rollercoaster.id}})">
-            <div class="card-body">
-                <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
-                    class="card-title">{{ rollercoaster.name}}</h5>
+        <h1 style="text-align: center;">Rollercoasters</h1>
+        {% for item in data %}
+        <div class="card shadow bg-white rounded page_container_c card-hover" onclick="open_rollercoaster({{item.rollercoaster.id}})">
+          <img alt="image of {{item.rollercoaster.name}}" class="card-img-top rollercoaster_card_img" src="/static/assets/{{ item.rollercoaster.id }}.jpg">
+          <div class="card-body">
+            <div>
+                <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;" class="card-title">{{ item.rollercoaster.name }}</h5>
+                <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{ item.average_score }}</span>    
             </div>
+            </h5>
+            <div style="gap:40px" class="page_container_h">
+                <div>
+                  <p>Year: {{item.rollercoaster.year}}</p>
+                  <p>Model: {{item.rollercoaster.model}}</p>
+                  <p>Manufacturer: {{item.rollercoaster.manufacturer}}</p>
+                </div>
+                <div>
+                  <p>Inversions: {{item.rollercoaster.inversions}}</p>
+                  <p>Speed: {{item.rollercoaster.speed}}</p>
+                  <p>Height: {{item.rollercoaster.height}}</p>
+                </div>
+              </div>
+          </div>
         </div>
         {% endfor %}
     </div>

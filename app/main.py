@@ -5,6 +5,7 @@ from . import models
 from sqlalchemy import func
 import json
 from .forms import ReviewForm
+from .db_manager import *
 
 main = Blueprint('main', __name__)
 
@@ -24,17 +25,10 @@ def rollercoaster_page(rc_id):
     rollercoaster = models.Rollercoaster.query.filter_by(id=rc_id).first()
     if rollercoaster:
         # Calculate the average score using the relationship
-        average_score = (
-            db.session.query(func.avg(models.Review.rating))
-            .join(models.Review.rollercoaster)  # Join with the Rollercoaster relationship
-            .filter(models.Review.rollercoaster_id == rollercoaster.id)
-            .first()
-        )[0]
+        average_score = get_average_score(rollercoaster.id)
 
         # Retrieve reviews using the Rollercoaster relationship
         reviews = rollercoaster.coaster_reviews
-
-        average_score = round(average_score, 2)
 
         return render_template('rollercoaster.html', rollercoaster=rollercoaster, average_score=average_score, reviews=reviews)
     else:
@@ -70,21 +64,20 @@ def review_page(review_id):
 def view_profile(user_id):
     user = models.User.query.get(user_id)
     if user:
-        # Use a join to fetch reviews along with associated rollercoaster data
-        db_query = (
-            db.session.query(models.Review, models.Rollercoaster)
-            .join(models.Rollercoaster, models.Review.rollercoaster_id == models.Rollercoaster.id)
-            .filter(models.Review.user_id == user_id)
-            .all()
-        )
-        return render_template('profile.html', user=user, reviews=db_query)
+        reviews = user.user_reviews
+
+        return render_template('profile.html', user=user, reviews=reviews)
     else:
         return redirect(url_for('main.four_o_four'))
 
 @main.route('/rollercoasters', methods=['GET'])
 def view_rollercoasters():
     rollercoasters = models.Rollercoaster.query.all()
-    return render_template('rollercoasters.html', rollercoasters=rollercoasters)
+    data = []
+    for rollercoaster in rollercoasters:
+        average_score = get_average_score(rollercoaster.id)
+        data.append({'rollercoaster': rollercoaster, 'average_score': average_score})
+    return render_template('rollercoasters.html', data=data)
 
 @main.route('/users', methods=['GET'])
 def view_users():
@@ -121,7 +114,8 @@ def add_review_post():
     db.session.commit()
     flash("added to db")
 
-    return redirect(url_for('main.review_page', review_id=new_review.id))
+    #return redirect(url_for('main.review_page', review_id=new_review.id))
+    return redirect(url_for('main.rollercoaster_page', rc_id=rollercoaster_id))
 
 @login_required
 @main.route("/add_like", methods=['POST'])
