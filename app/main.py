@@ -62,6 +62,7 @@ def review_page(review_id):
 
 @main.route('/profile/<user_id>')
 def view_profile(user_id):
+
     user = models.User.query.get(user_id)
     if user:
         reviews = user.user_reviews

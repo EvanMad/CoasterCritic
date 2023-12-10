@@ -5,7 +5,7 @@
   <div class="rollercoaster_header card shadow bg-white rounded">
     <div class="rollercoaster_page_holder">
       <div style="width:100%; ">
-        <h1 style="font-size: 5.5rem;">{{rollercoaster.name}}</h1>
+        <h1 style="font-size: 6rem;">{{rollercoaster.name}}</h1>
         {% if average_score > 8.5%}
         <h2 style="font-size: 4.5rem; color: #FF9933;">{{average_score}}</h2>
         {% else %}
@@ -52,7 +52,7 @@
     <div class="card card-hover shadow bg-white rounded" style="width: 100%;" onclick="open_profile({{review.user.id}})">
       <div class="card-body">
           <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
-              class="card-title">{{ review.user.name}}</h5>
+              class="card-title">@{{ review.user.name}}</h5>
           {% if review.rating > 8.5%}
           <p style="font-weight: bold; color: #ff9933cb; font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
               class="card-text"> {{ review.rating }}</p>
@@ -63,8 +63,8 @@
           <!-- <p class="card-text">{{ review.review_text[:100] }}...</p> -->
           <p class="card-text">{{ review.review_text}}</p>
           <div style="display: flex; align-items: center; gap:5px;">
-            <div id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like(event, {{review.id}})"><i class="fas fa-heart"></i></div>
-            <span id="{{review.id}}-likes">{{review.likes}}</span>
+            <div style="font-size: 2rem;" id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like(event, {{review.id}})"><i class="fas fa-heart"></i></div>
+            <span style="font-size: 1.5rem;" id="{{review.id}}-likes">{{review.likes}}</span>
           </div>
       </div>
   </div>

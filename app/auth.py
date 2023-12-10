@@ -23,7 +23,7 @@ def login_post():
     # Find if user exists in database, check credentials, then handle acordingly
     user = User.query.filter_by(name=name).first()
     if not user or not check_password_hash(user.password, password):
-        flash('wrong')
+        flash('Wrong username and/or password, please try again')
         return redirect(url_for('auth.login'))
     login_user(user)
     return redirect(url_for('main.profile'))
@@ -42,7 +42,7 @@ def signup_post():
     user = User.query.filter_by(name=name).first()
     # Check user exists
     if user:
-        flash("user exists")
+        flash("User already exists, please signup with a different username")
         return redirect(url_for('auth.signup'))
     # Add user to db
     new_user = User(name=name, password=generate_password_hash(

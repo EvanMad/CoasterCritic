@@ -4,13 +4,6 @@
 <div class="container mt-5">
     <div class="card shadow p-3 mb-5 bg-white rounded">
         <h1 class="font-test text-center mb-4">Log in</h1>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="alert alert-danger" role="alert">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-        {% endwith %}
         <form action="/login" method="post" name="submit" autocomplete="off">
             {{ form.hidden_tag() }}
             <div class="input-group mb-3">
