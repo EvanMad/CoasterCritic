@@ -65,8 +65,18 @@ def view_profile(user_id):
     user = models.User.query.get(user_id)
     if user:
         reviews = user.user_reviews
+        total_reviews = len(reviews)
 
-        return render_template('profile.html', user=user, reviews=reviews)
+        try:
+            total_likes = sum(review.likes for review in reviews)
+        except:
+            total_likes = 0
+
+        highest_review = max(reviews, key=lambda review: review.rating, default=None)
+        lowest_review = min(reviews, key=lambda review: review.rating, default=None)
+        average_review = round(sum(review.rating for review in reviews) / total_reviews, 2) if total_reviews > 0 else None
+
+        return render_template('profile.html', user=user, reviews=reviews, total_reviews=total_reviews, highest_review=highest_review, lowest_review=lowest_review, average_review=average_review, total_likes=total_likes)
     else:
         return redirect(url_for('main.four_o_four'))
 

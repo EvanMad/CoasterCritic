@@ -161,8 +161,8 @@ body {
   display: flex;
   flex-direction: row;
   gap:18px;
-  border: 2px solid #29a3a3;
-  border-radius: 1px;
+  /* border: 2px solid #29a3a3;
+  border-radius: 1px; */
   background-color: white;
   width: 50%;
   margin-bottom: 30px;

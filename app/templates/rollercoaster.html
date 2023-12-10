@@ -37,7 +37,7 @@
     <h2>Reviews</h2>
     {% for review in reviews%}
     <!-- <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;" onclick="open_review({{review.id}})"> -->
-    <div class="card card-hover shadow bg-white rounded" style="width: 100%; border: 2px solid #29a3a3; border-radius: 1px;" onclick="open_profile({{review.user.id}})">
+    <div class="card card-hover shadow bg-white rounded" style="width: 100%;" onclick="open_profile({{review.user.id}})">
       <div class="card-body">
           <h5 style="font-size: 35px; font-family: Walfork, Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;"
               class="card-title">{{ review.user.name}}</h5>
