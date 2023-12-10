@@ -27,12 +27,13 @@ def index():
     )
 
     # Highest-rated rollercoaster
-    highest_rated_rollercoasters = models.Rollercoaster.query \
-        .outerjoin(models.Review) \
-        .group_by(models.Rollercoaster.id) \
-        .order_by(func.avg(models.Review.rating).desc()) \
-        .limit(5) \
+    highest_rated_rollercoasters = (models.Rollercoaster.query
+        .outerjoin(models.Review)
+        .group_by(models.Rollercoaster.id)
+        .order_by(func.avg(models.Review.rating).desc())
+        .limit(5)
         .all()
+    )
 
     # If you want to fetch the average score for each rollercoaster, you can use your function
     average_scores = {rollercoaster.id: get_average_score(rollercoaster.id) for rollercoaster in highest_rated_rollercoasters}

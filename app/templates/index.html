@@ -62,18 +62,19 @@
         <div class="card-body">
           <h3 class="card-title">Trending Review</h3>
 
-          <div class="card card-hover shadow bg-white rounded page_container_c mb-3" style="width: 100%; height:95%"
-            onclick="open_rollercoaster({{trending_review.rollercoaster.id}})">
-            <img alt="image of {{trending_review.rollercoaster.name}}" class="card-img-top rollercoaster_card_img"
-              src="/static/assets/{{ trending_review.rollercoaster.id }}.jpg">
-            <div class="card-body page_container_c">
-              <h2>{{ trending_review.rollercoaster.name}}</h5>
-              <h5 style="font-size: 16px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
-                class="card-text">Rating: {{ trending_review.rating }}</h5>
-              <h5 style="font-size: 14px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
-                class="card-text">{{ trending_review.review_text}}</h5>
-            </div>
+        <div class="card card-hover shadow bg-white rounded page_container_c mb-3" style="width: 100%; height:95%; margin-left: 0px !important;"
+          onclick="open_rollercoaster({{trending_review.rollercoaster.id}})">
+          <img alt="image of {{trending_review.rollercoaster.name}}" class="card-img-top rollercoaster_card_img"
+            src="/static/assets/{{ trending_review.rollercoaster.id }}.jpg">
+          <div class="card-body page_container_c">
+            <h2 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+              class="card-title">{{ trending_review.rollercoaster.name}}</h2>
+            <h2 style="font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+              class="card-text">{{ trending_review.rating }}</h2>
+            <h4 style="font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+              class="card-text">{{ trending_review.review_text}}</h4>
           </div>
+        </div>
 
         </div>
       </div>

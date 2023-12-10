@@ -1,13 +1,13 @@
 <!-- - write reviews -->
-- accessibility
+<!-- - accessibility -->
 <!-- - users/rollercoasters revamp -->
-- home page !!
+<!-- - home page !! -->
 - rollercoaster descriptions?
-- likes
+<!-- - likes -->
 
 <!-- - assets in static -->
 - templates in folders
-- flashed messages
+<!-- - flashed messages -->
 <!-- - ditch search -->
 <!-- - check colours/contrast on coolors -->
 <!-- - icons on navbar -->
@@ -18,6 +18,8 @@
 - reference wikipedia images in folder
 - validate password/usernames
 <!-- - validate review (score 0-10) -->
+
+- force 2dp 
 
 - test.py
 - https://dbdiagram.io/d

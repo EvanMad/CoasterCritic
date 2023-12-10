@@ -2,8 +2,10 @@
 
 {% block content %}
 <div class="page_container_c">
+    <h1 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px;">
+        Rollercoasters
+    </h1>
     <div class="review_container">
-        <h1 style="text-align: center;">Rollercoasters</h1>
         {% for item in data %}
         <div class="card shadow bg-white rounded page_container_c card-hover" onclick="open_rollercoaster({{item.rollercoaster.id}})">
           <img alt="image of {{item.rollercoaster.name}}" class="card-img-top rollercoaster_card_img" src="/static/assets/{{ item.rollercoaster.id }}.jpg">

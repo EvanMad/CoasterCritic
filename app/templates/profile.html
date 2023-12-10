@@ -52,11 +52,15 @@
               </tr>
               <tr>
                 <th>Highest Review</th>
-                <td>{{ highest_review.rating }} ({{ highest_review.rollercoaster.name }})</td>
+                {%if highest_review %}
+                  <td>{{ highest_review.rating }} ({{ highest_review.rollercoaster.name }})</td>
+                {% endif %}
               </tr>
               <tr>
                 <th>Lowest Review</th>
-                <td>{{ lowest_review.rating }} ({{ lowest_review.rollercoaster.name }})</td>
+                {%if highest_review %}
+                  <td>{{ lowest_review.rating }} ({{ lowest_review.rollercoaster.name }})</td>
+                {%endif%}
               </tr>
               <tr>
                 <th>Average Review</th>

@@ -46,7 +46,9 @@
   </ul> -->
 
   <div class="review_container">
-    <h2>Reviews</h2>
+    <h2 class="title card shadow bg-white rounded" style="font-weight:bold; color: #29A3A3; padding: 15px;">
+      Reviews
+    </h2>
     {% for review in reviews%}
     <!-- <div class="card" style="width: 96%; border: 2px solid #ff9933cb; border-radius: 1px;" onclick="open_review({{review.id}})"> -->
     <div class="card card-hover shadow bg-white rounded" style="width: 100%;" onclick="open_profile({{review.user.id}})">

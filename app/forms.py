@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, FloatField, ValidationError, SelectField, TextAreaField, DecimalField
-from wtforms.validators import DataRequired, NumberRange, InputRequired
+from wtforms.validators import DataRequired, NumberRange, InputRequired, Length
 from .db_manager import *
 
 from . import db
@@ -15,7 +15,7 @@ class LoginForm(FlaskForm):
 class SignupForm(FlaskForm):
     name = FloatField('name', validators=[DataRequired()])
     password = StringField('password', validators=[
-        DataRequired()])
+        DataRequired(), Length(min=1, max=20, message="Must be between 1 and 20 characters")])
 
 # Form for creating reviews, displayed in review page
 # TODO: additional validation
