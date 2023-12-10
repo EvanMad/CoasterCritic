@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(100))
 
     # Remove the explicit backref definition
-    reviews = db.relationship('Review', lazy=True)
+    reviews = db.relationship('Review', lazy=True, back_populates='user')
 
 
 class Rollercoaster(db.Model):

@@ -168,3 +168,7 @@ body {
   margin-bottom: 30px;
   margin-top:15px;
 }
+
+.error {
+  color: red
+}

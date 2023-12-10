@@ -9,10 +9,65 @@ from .db_manager import *
 
 main = Blueprint('main', __name__)
 
-# Render index
 @main.route('/')
 def index():
-    return render_template('index.html')
+    # Rollercoasters with most reviews
+    trending_rollercoasters = (models.Rollercoaster.query
+        .join(models.Review, models.Rollercoaster.id == models.Review.rollercoaster_id)
+        .group_by(models.Rollercoaster.id)
+        .order_by(func.count(models.Review.id).desc())
+        .limit(5)
+        .all()
+    )
+
+    # Review with most likes
+    trending_review = (models.Review.query
+        .order_by(models.Review.likes.desc())
+        .first()
+    )
+
+    # Highest-rated rollercoaster
+    highest_rated_rollercoasters = models.Rollercoaster.query \
+        .outerjoin(models.Review) \
+        .group_by(models.Rollercoaster.id) \
+        .order_by(func.avg(models.Review.rating).desc()) \
+        .limit(5) \
+        .all()
+
+    # If you want to fetch the average score for each rollercoaster, you can use your function
+    average_scores = {rollercoaster.id: get_average_score(rollercoaster.id) for rollercoaster in highest_rated_rollercoasters}
+
+    highest_rated_rollercoasters = {'rollercoasters': highest_rated_rollercoasters, 'average_scores': average_scores}
+
+
+    # User with most review likes
+    most_liked_users_data = (models.User.query 
+        .join(models.Review, models.User.id == models.Review.user_id) 
+        .group_by(models.User.id) 
+        .with_entities(models.User, func.sum(models.Review.likes).label('total_likes'))
+        .order_by(func.sum(models.Review.likes).desc())
+        .limit(5)
+        .all()
+    )
+
+    # Extract relevant information
+    most_liked_users = [{'user': user_data[0], 'total_likes': user_data.total_likes} for user_data in most_liked_users_data]
+
+    trending_rollercoasters_data = []
+    for rollercoaster in trending_rollercoasters:
+        average_score = get_average_score(rollercoaster.id)
+        trending_rollercoasters_data.append({'rollercoaster': rollercoaster, 'average_score': average_score})
+
+    print(trending_rollercoasters_data)
+    print(trending_review)
+    print(most_liked_users)
+    print(highest_rated_rollercoasters)
+
+    return render_template('index.html',
+                           trending_rollercoasters_data=trending_rollercoasters_data,
+                           trending_review=trending_review,
+                           highest_rated_rollercoasters=highest_rated_rollercoasters,
+                           most_liked_users=most_liked_users)
 
 @main.route('/profile')
 @login_required
@@ -123,7 +178,7 @@ def add_review_post():
                         )
     db.session.add(new_review)
     db.session.commit()
-    flash("added to db")
+    flash("Review Written!", 'alert-success')
 
     #return redirect(url_for('main.review_page', review_id=new_review.id))
     return redirect(url_for('main.rollercoaster_page', rc_id=rollercoaster_id))
@@ -163,4 +218,3 @@ def remove_like():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-

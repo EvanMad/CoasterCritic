@@ -23,7 +23,7 @@ def login_post():
     # Find if user exists in database, check credentials, then handle acordingly
     user = User.query.filter_by(name=name).first()
     if not user or not check_password_hash(user.password, password):
-        flash('Wrong username and/or password, please try again')
+        flash('Wrong username and/or password, please try again', 'alert-danger')
         return redirect(url_for('auth.login'))
     login_user(user)
     return redirect(url_for('main.profile'))
@@ -42,14 +42,14 @@ def signup_post():
     user = User.query.filter_by(name=name).first()
     # Check user exists
     if user:
-        flash("User already exists, please signup with a different username")
+        flash("User already exists, please signup with a different username", 'alert-danger')
         return redirect(url_for('auth.signup'))
     # Add user to db
     new_user = User(name=name, password=generate_password_hash(
         password, method='pbkdf2:sha256'))
     db.session.add(new_user)
     db.session.commit()
-    flash("added to db")
+    flash("Account Created!", 'alert-success')
     return redirect(url_for('auth.login'))
 
 # Log user out using flask_login()

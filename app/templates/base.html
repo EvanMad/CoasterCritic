@@ -96,12 +96,12 @@
                 </div>
             </div>
         </nav>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="alert alert-danger" role="alert">
-                {{ messages[0] }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="alert {{category}}" role="alert">
+                {{ message }}
             </div>
-        {% endif %}
+        {% endfor %}
         {% endwith %}
         {% block content %}{% endblock %}
     </div>

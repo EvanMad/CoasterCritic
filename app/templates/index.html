@@ -2,43 +2,98 @@
 
 {% block content %}
 <div class="container-fluid page_container_c">
-    <h1 class="font-test">Coaster Critic</h1>
-    
-    <div class="row row-fluid g-3" style="width: 95%;">
-      <div class="col-md-6">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Card 1</h5>
-            <p class="card-text">Content for card 1.</p>
-            
+  <h1 class="font-test">Coaster Critic</h1>
+
+  <div class="row row-fluid g-3" style="width: 95%;">
+    <div class="col-md-6">
+      <div class="card shadow bg-white rounded h-100">
+        <div class="card-body">
+          <h3 class="card-title">Trending Rollercoasters</h5>
+            <div class="page_container_v">
+              {% for item in trending_rollercoasters_data %}
+              <div class="card shadow bg-white rounded page_container_h card-hover"
+                onclick="open_rollercoaster({{item.rollercoaster.id}})">
+                <img style="width: 10rem; height: 7rem;" alt="image of {{item.rollercoaster.name}}"
+                  class="img-fluid img-thumbnail" src="/static/assets/{{ item.rollercoaster.id }}.jpg">
+                <div>
+                  <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+                    class="card-title">{{ item.rollercoaster.name }}</h5>
+                  <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{ item.average_score }}</span>
+                </div>
+                </h5>
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow bg-white rounded h-100">
+        <div class="card-body">
+          <h3 class="card-title">Highest rated rollercoasters</h3>
+          <div class="page_container_v">
+            {% for rollercoaster in highest_rated_rollercoasters.rollercoasters %}
+            <div class="card shadow bg-white rounded page_container_h card-hover"
+              onclick="open_rollercoaster({{rollercoaster.id}})">
+              <img style="width: 10rem; height: 7rem;" alt="image of {{rollercoaster.name}}"
+                class="img-fluid img-thumbnail" src="/static/assets/{{ rollercoaster.id }}.jpg">
+              <div>
+                <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+                  class="card-title">{{ rollercoaster.name }}</h5>
+                <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{
+                  highest_rated_rollercoasters.average_scores[rollercoaster.id] }}</span>
+              </div>
+              </h5>
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Card 2</h5>
-            <p class="card-text">Content for card 2.</p>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow bg-white rounded h-100">
+        <div class="card-body">
+          <h3 class="card-title">Trending Review</h3>
+
+          <div class="card card-hover shadow bg-white rounded page_container_c mb-3" style="width: 100%;"
+            onclick="open_rollercoaster({{trending_review.rollercoaster.id}})">
+            <img alt="image of {{trending_review.rollercoaster.name}}" class="card-img-top rollercoaster_card_img"
+              src="/static/assets/{{ trending_review.rollercoaster.id }}.jpg">
+            <div class="card-body page_container_c">
+              <h5 style="font-size: 20px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+                class="card-title">{{ trending_review.rollercoaster.name}}</h5>
+              <h5 style="font-size: 16px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+                class="card-text">Rating: {{ trending_review.rating }}</h5>
+              <h5 style="font-size: 14px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+                class="card-text">{{ trending_review.review_text}}</h5>
+            </div>
           </div>
+
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Card 3</h5>
-            <p class="card-text">Content for card 3.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Card 4</h5>
-            <p class="card-text">Content for card 4.</p>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow bg-white rounded h-100">
+        <div class="card-body">
+          <h5 class="card-title">Most liked users</h5>
+          <div class="page_container_v">
+            {% for most_liked_user in most_liked_users %}
+            <div class="card shadow bg-white rounded page_container_h card-hover"
+              onclick="open_profile({{most_liked_user.user.id}})">
+              <div>
+                <h5 style="font-size: 35px; font-family: Walfork,Walsheim,Helvetica Neue,Helvetica,Arial,sans-serif;"
+                  class="card-title">{{ most_liked_user.user.name }}</h5>
+                <span style="font-weight: bold; color: #ff9933cb; font-size: 35px;">{{ most_liked_user.total_likes }}
+                  Likes</span>
+              </div>
+              </h5>
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}
