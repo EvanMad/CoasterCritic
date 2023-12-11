@@ -14,14 +14,14 @@ main = Blueprint('main', __name__)
 def index():
     # Get the timestamp 36 hours ago
     trending_treshold = 36
-    timestamp_trending_treshold_hours_ago = datetime.utcnow() - timedelta(hours=trending_treshold)
+    timestamp_trending_treshold = datetime.utcnow() - timedelta(hours=trending_treshold)
 
     # Trending rollercoasters in the last 36 hours
     trending_rollercoasters = (
         models.Rollercoaster.query
         .join(models.Review, models.Rollercoaster.id == models.Review.rollercoaster_id)
         .join(models.Likes, (models.Review.id == models.Likes.review_id) & (models.Review.user_id == models.Likes.user_id))
-        .filter(models.Likes.created_at >= timestamp_trending_treshold_hours_ago)
+        .filter(models.Likes.created_at >= timestamp_trending_treshold)
         .group_by(models.Rollercoaster.id)
         .order_by(func.count(models.Likes.user_id).desc())
         .limit(5)
@@ -45,7 +45,7 @@ def index():
     trending_review = (
         models.Review.query
         .join(models.Likes, (models.Review.id == models.Likes.review_id) & (models.Review.user_id == models.Likes.user_id))
-        .filter(models.Likes.created_at >= timestamp_trending_treshold_hours_ago)
+        .filter(models.Likes.created_at >= timestamp_trending_treshold)
         .order_by(models.Likes.created_at.desc())
         .first()
     )
