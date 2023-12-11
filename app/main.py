@@ -85,7 +85,7 @@ def rollercoaster_page(rc_id):
         average_score = get_average_score(rollercoaster.id)
 
         # Retrieve reviews using the Rollercoaster relationship
-        reviews = rollercoaster.coaster_reviews
+        reviews = rollercoaster.reviews
 
         return render_template('rollercoaster.html', rollercoaster=rollercoaster, average_score=average_score, reviews=reviews)
     else:
@@ -122,7 +122,8 @@ def view_profile(user_id):
 
     user = models.User.query.get(user_id)
     if user:
-        reviews = user.user_reviews
+        print(user.liked_reviews)
+        reviews = user.reviews
         total_reviews = len(reviews)
 
         try:
@@ -191,10 +192,14 @@ def add_review_post():
 def add_like():
     try:
         review_id = json.loads(request.data)['review_id']
-        review = models.Review.query.filter_by(id=review_id).first()
+        review = models.Review.query.get(review_id)
 
         if review:
             review.likes += 1
+
+            like = models.Likes(user_id = current_user.id, review_id=review.id)
+            db.session.add(like)
+
             db.session.commit()
 
             return jsonify({"likes": review.likes, "status": "success"}), 200
@@ -202,6 +207,7 @@ def add_like():
             return jsonify({"error": "Review not found"}), 404
 
     except Exception as e:
+        print(e)
         return jsonify({"error": str(e)}), 500
 
 @login_required
@@ -213,6 +219,10 @@ def remove_like():
 
         if review:
             review.likes -= 1
+            
+            like = models.Likes.query.filter_by(user_id=current_user.id, review_id=review.id).first()
+            db.session.delete(like)
+
             db.session.commit()
 
             return jsonify({"likes": review.likes, "status": "success"}), 200
@@ -220,4 +230,5 @@ def remove_like():
             return jsonify({"error": "Review not found"}), 404
 
     except Exception as e:
+        print(e)
         return jsonify({"error": str(e)}), 500

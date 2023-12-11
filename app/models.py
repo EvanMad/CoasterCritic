@@ -17,8 +17,8 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(100))
 
-    # Remove the explicit backref definition
     reviews = db.relationship('Review', lazy=True, back_populates='user')
+    liked_reviews = db.relationship('Review', secondary='likes', back_populates='liked_by_users')
 
 
 class Rollercoaster(db.Model):
@@ -36,6 +36,11 @@ class Rollercoaster(db.Model):
     reviews = db.relationship('Review', lazy=True)
 
 
+class Likes(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
+    review_id = db.Column(db.Integer, db.ForeignKey('review.id'), nullable=False, primary_key=True)
+
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -46,3 +51,4 @@ class Review(db.Model):
 
     user = db.relationship('User', backref=db.backref('user_reviews', lazy=True))
     rollercoaster = db.relationship('Rollercoaster', backref=db.backref('coaster_reviews', lazy=True))
+    liked_by_users = db.relationship('User', secondary='likes', back_populates='liked_reviews')

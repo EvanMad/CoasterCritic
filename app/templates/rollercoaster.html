@@ -65,7 +65,11 @@
           <!-- <p class="card-text">{{ review.review_text[:100] }}...</p> -->
           <p style="font-size: 1.5rem;" class="card-text">{{ review.review_text}}</p>
           <div style="display: flex; align-items: center; gap:5px;">
-            <div style="font-size: 2rem;" id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like(event, {{review.id}})"><i class="fas fa-heart"></i></div>
+            {% if current_user in review.liked_by_users %}
+              <div style="font-size: 2rem;" id="{{review.id}}-icon" class="like-icon fa-lg liked" onclick="add_like(event, {{review.id}})"><i class="fas fa-heart"></i></div>
+            {% else %}
+              <div style="font-size: 2rem;" id="{{review.id}}-icon" class="like-icon fa-lg" onclick="add_like(event, {{review.id}})"><i class="fas fa-heart"></i></div>
+            {% endif %}
             <span style="font-size: 1.5rem;" id="{{review.id}}-likes">{{review.likes}}</span>
           </div>
       </div>
