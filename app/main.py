@@ -6,25 +6,55 @@ from sqlalchemy import func
 import json
 from .forms import ReviewForm
 from .db_manager import *
+from datetime import datetime, timedelta
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    # Rollercoasters with most reviews
-    trending_rollercoasters = (models.Rollercoaster.query
+    # Get the timestamp 36 hours ago
+    trending_treshold = 36
+    timestamp_trending_treshold_hours_ago = datetime.utcnow() - timedelta(hours=trending_treshold)
+
+    # Trending rollercoasters in the last 36 hours
+    trending_rollercoasters = (
+        models.Rollercoaster.query
+        .join(models.Review, models.Rollercoaster.id == models.Review.rollercoaster_id)
+        .join(models.Likes, (models.Review.id == models.Likes.review_id) & (models.Review.user_id == models.Likes.user_id))
+        .filter(models.Likes.created_at >= timestamp_trending_treshold_hours_ago)
+        .group_by(models.Rollercoaster.id)
+        .order_by(func.count(models.Likes.user_id).desc())
+        .limit(5)
+        .all()
+    )
+    if(len(trending_rollercoasters) == 0):
+        trending_rollercoasters = (models.Rollercoaster.query
         .join(models.Review, models.Rollercoaster.id == models.Review.rollercoaster_id)
         .group_by(models.Rollercoaster.id)
-        .order_by(func.count(models.Review.id).desc())
         .limit(5)
         .all()
     )
 
-    # Review with most likes
-    trending_review = (models.Review.query
-        .order_by(models.Review.likes.desc())
+    trending_rollercoasters_data = []
+    for rollercoaster in trending_rollercoasters:
+        average_score = get_average_score(rollercoaster.id)
+        trending_rollercoasters_data.append({'rollercoaster': rollercoaster, 'average_score': average_score})
+
+
+    # Trending review with most likes in the last 36 hours
+    trending_review = (
+        models.Review.query
+        .join(models.Likes, (models.Review.id == models.Likes.review_id) & (models.Review.user_id == models.Likes.user_id))
+        .filter(models.Likes.created_at >= timestamp_trending_treshold_hours_ago)
+        .order_by(models.Likes.created_at.desc())
         .first()
     )
+    if(trending_review == None):
+        # Review with most likes
+        trending_review = (models.Review.query
+            .order_by(models.Review.likes.desc())
+            .first()
+        )
 
     # Highest-rated rollercoaster
     highest_rated_rollercoasters = (models.Rollercoaster.query
@@ -54,11 +84,6 @@ def index():
 
     # Extract relevant information
     most_liked_users = [{'user': user_data[0], 'total_likes': user_data.total_likes} for user_data in most_liked_users_data]
-
-    trending_rollercoasters_data = []
-    for rollercoaster in trending_rollercoasters:
-        average_score = get_average_score(rollercoaster.id)
-        trending_rollercoasters_data.append({'rollercoaster': rollercoaster, 'average_score': average_score})
 
     print(trending_rollercoasters_data)
     print(trending_review)
