@@ -30,11 +30,6 @@ def index():
     # Most liked users
     most_liked_users = get_most_liked_users()
 
-    # print(trending_rollercoasters_data)
-    # print(trending_review)
-    # print(most_liked_users)
-    # print(highest_rated_rollercoasters)
-
     return render_template('index.html',
                            trending_rollercoasters_data=trending_rollercoasters_data,
                            trending_review=trending_review,
@@ -69,6 +64,8 @@ def get_image(filename):
 def four_o_four():
     return render_template('404.html')
 
+# Route for viewing each individual review
+# !warning deprecated page 
 @main.route('/review/<review_id>')
 def review_page(review_id):
     db_query = (
@@ -92,7 +89,6 @@ def view_profile(user_id):
 
     user = models.User.query.get(user_id)
     if user:
-        print(user.liked_reviews)
         reviews = user.reviews
         total_reviews = len(reviews)
 

@@ -67,9 +67,11 @@ def get_highest_rollercoaster():
         .all()
     )
 
+    # Inline tteration over each rollercoater to get their score using function in db_manager 
     average_scores = {rollercoaster.id: get_average_score(rollercoaster.id) for rollercoaster in highest_rated_rollercoasters}
     highest_rated_rollercoasters.sort(key=lambda rollercoaster: average_scores.get(rollercoaster.id, 0), reverse=True)
 
+    # Bundle data for template
     highest_rated_rollercoasters = {'rollercoasters': highest_rated_rollercoasters, 'average_scores': average_scores}
 
 
